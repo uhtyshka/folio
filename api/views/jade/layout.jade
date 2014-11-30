@@ -1,0 +1,15 @@
+doctype html
+html(data-ng-app='Folio')
+  head
+    title= title
+    meta(charset='utf-8')
+    link(rel = 'stylesheet', href = '/css/bootstrap.css')
+    link(rel = 'stylesheet', href = '/css/main.css')
+    script(src = '//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js')
+    script(src = '//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.js')
+    script(src = 'https://code.jquery.com/jquery-1.11.1.js')
+    script(src = 'http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js')
+    script(src = '')
+    script(src='/js/main.js')
+  body(data-ng-controller='App' data-ng-init='init()')
+    block content

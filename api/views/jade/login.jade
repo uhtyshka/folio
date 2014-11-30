@@ -1,0 +1,12 @@
+extends layout
+block login
+  div( class = 'container app-box')
+    div( class = 'row')
+      div( class = 'col col-lg-6')
+        div( class = 'row email-box')
+          label( for = 'email') Email
+          input( id = 'email', type='text' placeholder='@')
+        div( class = 'row pswd-box')
+          label( for = 'pswd') Password
+          input( id = 'pswd', type='password' placeholder='Password')
+        div( class = 'row btn-box')

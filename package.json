@@ -1,0 +1,48 @@
+{
+  "name": "folio",
+  "version": "1.0.0",
+  "description": "angular + node",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/uhtyshka/folio"
+  },
+  "dependencies": {
+    "angular": "~1.3.0",
+    "angular-route": "~1.3.0",
+    "body-parser": "~1.0.2",
+    "bootstrap": "~3.2.0",
+    "browserify": "~6.1.0",
+    "cookie": "^0.1.2",
+    "crc": "^3.0.0",
+    "debug": "^2.1.0",
+    "express": "~4.9.8",
+    "express-jwt": "^0.2.2",
+    "express-logger": "0.0.3",
+    "express-session": "^1.9.1",
+    "fs": "0.0.2",
+    "gulp": "~3.8.9",
+    "jade": "~1.7.0",
+    "jquery": "~1.9.0",
+    "json": "0.0.14",
+    "jsonwebtoken": "^0.4.1",
+    "lodash": "^2.4.1",
+    "mongoose": "~3.8.18",
+    "mongoose-encrypted": "0.0.9",
+    "mongoose-times": "^0.1.0",
+    "mongoose-unique-validator": "^0.4.1",
+    "morgan": "^1.5.0",
+    "node-uuid": "^1.4.1",
+    "redis": "^0.12.1",
+    "underscore": "^1.7.0",
+    "winston": "^0.8.3"
+  },
+  "author": "utshka@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/uhtyshka/folio/issues"
+  },
+  "homepage": "https://github.com/uhtyshka/folio"
+}
