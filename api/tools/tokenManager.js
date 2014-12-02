@@ -1,3 +1,15 @@
+
+
+
+//
+//@TODO: need to add methods for db
+//       and handle the router interaction.
+//       You can check:
+//         https://www.npmjs.org/package/redis-sessions
+//         https://github.com/paulthomas404/trash-map/blob/8be8463e6a7ec20c3c7d077aa0884e547d05984b/api/services/AuthController.js
+//
+
+
 var RedisSessions = require("redis-sessions"),
     _             = require('underscore');
 //
@@ -20,20 +32,6 @@ rs = new RedisSessions({
 
 rsname = "folio";
 
-//console.log('its token manager');
-
-/*function allSessions (options) {
-  var opt = {
-        app : options.app || 'folio',
-        dt  : options.dt  || 3600   ,
-      },
-      callback = _.isFunction(options.callback)
-                   ? options.callback
-                   : function(err, resp){ return console.log('callback from allSession(): ', resp); };
-
-  return rs.soapp(opt, callback);
-}
-*/
 rs.create({
     app : 'folio'
   , id  : 'someId'
@@ -41,7 +39,9 @@ rs.create({
   , ttl : 3600
   }, function(err, resp) {
     console.log(resp);
-  });
+  }
+);
+
 rs.soapp({
   app : 'folio'
 , dt : 3600
@@ -52,51 +52,73 @@ rs.soapp({
 
   console.log(' \n ======================= \n ')
   rs.killall({ app : 'folio' }, function(err, resp) {
-    console.log('inside killall')
+    console.log('inside killall');
     console.log(resp);
   });
 });
 
-var x = allSessions({
+/*var x = allSessions({
   callback : function (err, resp) {
     return resp;
   }
-});
+});*/
 
 module.exports = {
-  createUserSession: function (userid, callback) {
+  createSession: function (options, callback) {
+    var opt      = {
+      userid : options.userid,
+      userip : options.userip
+    };
     var response = {
       code  : 200,
       token : null,
       error : null
     };
-    if (userId == undefined) {
+    if (opt.userid == undefined || opt.userip == undefined) {
       response.code  = 403;
       response.token = null;
       response.error = 'userId is undefined. Please, check'
       return callback(response);
     }
     rs.create({
-      app : rsname,
-      id  : userid,
-      ip  : '127.0.0.1',
-      ttl : 3600
+      app    : rsname,
+      id     : opt.userid,
+      ip     : opt.userip,
+      msg    : 'hello from token',
+      ttl    : 120
     }, function (err, resp) {
       if(err){
+        console.log(' - REDIS: fail for user id: ' + opt.userid + ' with ip: ' + opt.userip);
         response.code  = 403;
         response.token = null;
         response.error = err;
         return callback(response);
       }
+      console.log(' - REDIS: success for user id: ' + opt.userid + ' with ip: ' + opt.userip);
       response.code  = 200;
       response.token = JSON.stringify(resp);
       response.error = null;
       return callback(response);
     });
   }, // end createUserSession
+
+  findSession : function (options, callback) {
+    var opt = {
+      token : options.token
+    };
+    rs.get({
+      app   : rsname,
+      token : opt.token
+    }, function (err, resp) {
+//@TODO: add error handler      
+      console.log(resp);
+      return callback(resp);
+    })
+  }, //end findSession
+
   killSession : function (req, callback) {
-    
+
   }
 };
 
-console.log('its x: ', x);
+//console.log('its x: ', x);

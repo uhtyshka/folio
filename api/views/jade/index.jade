@@ -1,6 +1,7 @@
 extends layout
 block content
-  div( class='demo' )
+  
+  //div( class='demo' )
     div( class='circle' )
       div( class='inner' )
     div( class='circle' )
@@ -11,8 +12,9 @@ block content
       div( class='inner' )
     div( class='circle' )
       div( class='inner' )
-  div(ng-view)
-  div(id='spinner')
+
+  div(ng-view, id="view-box")
+  //div(id='spinner')
      div(class='spinner')
 
   //- h1= title

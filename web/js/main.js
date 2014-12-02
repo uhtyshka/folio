@@ -51,7 +51,8 @@ app.controller('Login', function($scope, $http, $window, $location) {
     };
     $http.post('/login', $scope.user)
          .success(function(data, status, headers, config) {
-           $window.sessionStorage.token = data.token;
+           var token = (JSON.parse(data.token)).token;
+           $window.sessionStorage.token = token;
            $location.path('/auth/panel');
            //$scope.getPanel();
            console.log('===========================');
@@ -64,20 +65,29 @@ app.controller('Panel', function($scope, $http, $window, $location) {
   $scope.getPanel = function() {
     $http.get('/auth/panel')
          .success(function(data, status, headers, config) {
-           console.log($location);
-           console.log('ITS FROM GET ===========================');
-           console.log(data);
+           
          })
          .error(function(data, status, headers, config) {
 
          });
+
   };  
+  $scope.checkSessionClick = function () {
+    $http.get('/auth/getsessions')
+         .success(function (data, status, headers, config) {
+           console.log('success from getsessions')
+         })
+         .error(function (argument) {
+           console.log('error from getsessions')
+         });
+  }
   $scope.$on('$viewContentLoaded', function() {
+    
+    $('#panel-box').height($(window).height());
+
     $http.get('/auth/panel')
          .success(function(data, status, headers, config) {
-           console.log($location);
-           console.log('ITS FROM GET ===========================');
-           console.log(data);
+//@TODO: this call back doesnt shoot. Discover why
          })
          .error(function(data, status, headers, config) {
            $location.path('/login');
@@ -89,8 +99,12 @@ app.factory('authInterceptor', function($rootScope, $q, $window) {
   return {
       request: function (config) {
         config.headers = config.headers || {};
+//
+//@TODO: dont use sessionStorage. Store token inside the app. 
+//       In this case you dont need clearify sessionStorage each time        
+//
         if ($window.sessionStorage.token) {
-          config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+          config.headers.Authorization = $window.sessionStorage.token;
         }
         return config;
       },

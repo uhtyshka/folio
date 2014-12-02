@@ -14,6 +14,7 @@ body{
   min-height: 100%;
   height: auto;
   background: white;
+  position: relative;
 }
 /*
 circle
@@ -109,11 +110,132 @@ animation: spin 5s infinite linear;
 Login
 */
 
-#login-box{
+#login-box {
   width: 300px;
   margin: auto;
   margin-top: 120px;
 }
+
+#view-box {
+  background: rgba(0,0,0,0.1);
+}
+
+#panel-box > div {
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#header-box,
+#footer-box {
+  height: 10%;
+}
+
+#header-box, #footer-box,
+#sidebar-box, #data-box{
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.3);
+  -moz-box-shadow:    0px 0px 6px 0px rgba(50, 50, 50, 0.3);
+  box-shadow:         0px 0px 6px 0px rgba(50, 50, 50, 0.3);
+  background: white;
+}
+
+#header-box {
+  margin-top: 50px;
+}
+
+#workspace-box {
+  height: 60%;
+}
+
+#footer-box {
+
+}
+
+
+#sidebar-box, #data-box{
+  height: 100%;
+}
+
+#sidebar-box{
+  float: left;
+  width: 22%;
+}
+
+#data-box{
+  float: right;
+  width: 75%;
+}
+
+#logo-box {
+  float: left;
+  width: 22%;
+  height: 100%;
+  background: rgb(62, 127, 217);
+  text-align: center;
+}
+
+#logo-box > span {
+  font-size: 28px;
+  color: white;
+}
+
+
+
+
+
+/* 
+
+==============================================================
+
+*/
+
+
+
+
+/* Container box to set the sides relative to */
+.cube {
+  width: 30%;
+  text-align: center;
+  margin: 0 auto;
+  height: 75px;
+
+  -webkit-transition: -webkit-transform .33s;
+  transition: transform .33s; /* Animate the transform properties */
+
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d; /* <-NB */
+}
+
+/* The two faces of the cube */
+.flippety,.flop {
+  background: rgb(62, 127, 217);
+  -webkit-box-shadow: inset 0px 0px 4px 1px rgba(50, 50, 50, 0.75);
+-moz-box-shadow:    inset 0px 0px 4px 1px rgba(50, 50, 50, 0.75);
+box-shadow:         inset 0px 0px 4px 1px rgba(50, 50, 50, 0.75);
+  height: 75px;
+}
+
+/* Position the faces */
+.flippety {
+  -webkit-transform: translateZ(50px);
+  transform: translateZ(20px);
+}
+
+.flop {
+  -webkit-transform: rotateX(-90deg) translateZ(-50px);
+  transform: rotateX(-90deg) translateZ(-50px);
+}
+
+/* Rotate the cube */
+.cube:hover {
+  -webkit-transform: rotateX(89deg);
+  transform: rotateX(89deg); /* Text bleed at 90º */
+
+
+
+
+
+
 
 
 

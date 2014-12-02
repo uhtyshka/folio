@@ -28,10 +28,19 @@ router.all('*', function(req, res, next) {
 });
 
 
-router.use('/auth', expJwt({secret: SECRET}), function(req, res) {
+router.use('/auth', function(req, res, next) {
   //console.log(tokenManager)
-  console.log('its x')
-  console.log(req.header['authorization'])
+  console.log('::::: Should be check for session in redis')
+  console.log(req.headers['authorization'])
+  tokenManager.findSession({
+    token : req.headers['authorization']
+    //token : '547a2452761dbff97e6a15a5s'
+  }, function (response) {
+    if (!response) {
+      res.send(401);
+    }
+    next();
+  });
 });
 
 
@@ -48,6 +57,9 @@ router.get('/login', function(req, res) {
 });*/
 
 router.post('/login', function(req, res) {
+//
+//@TODO: connect redis to project. Check tokenManager methods
+//
   var clientPassword = req.body.password;
   function loginCallback(err, user){
     if( !!err ){ return next( err ); }
@@ -58,40 +70,21 @@ router.post('/login', function(req, res) {
           res.send(404);
           return; 
         }
-        var sessionId = uuid();       
-        console.log('========================================')
-        console.log('Auth was success');
-        console.log('random sessionId:' + sessionId);
-        console.log('========================================')
         var toToken = {
-          u : user._id,
-          s : sessionId
+          userid  : user._id,
+          userip  : req.connection.remoteAddress
         };
-        var token = jwt.sign(JSON.stringify(toToken), SECRET, {
-          expireTimeInMinutes: 30
+        tokenManager.createSession(toToken, function (resp) {
+          var x = resp.token
+          console.log(' - ROUTER: executed as callback for redis. Token is ', resp);
+          res.json({token: resp.token}); 
         });
-         var currentdate = new Date(); 
-         var datetime = "Last Sync: " + currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/" 
-                + currentdate.getFullYear() + " @ "  
-                + currentdate.getHours() + ":"  
-                + currentdate.getMinutes() + ":" 
-                + currentdate.getSeconds();
-        console.log(datetime);
-        console.log('Token:');
-        console.log(token);
-        console.log('========================================')
-        console.log('Lets decode token before sendind');
-        jwt.verify(token, SECRET, function(err, decoded) {
-          console.log(decoded)
-        });
-        console.log('========================================')
-         res.json({token: token});
 
       });
     }
   };
-
+  console.log('its ip to /login: ', req.connection.remoteAddress)
+  console.log(tokenManager);
   User.findOne({ email: req.body.username }, loginCallback);
 });
 
@@ -105,6 +98,14 @@ router.get('/auth/panel', function(req, res) {
     resp: 'you are authorized'
   });
 });
+
+
+router.get('/auth/getsessions', function (req, res) {
+  console.log('Im from get sessions! Whants going on here&');
+  res.json({msg: 'hello from other side'});
+});
+
+
 router.post('/logout', function(req, res) {
 
 });
