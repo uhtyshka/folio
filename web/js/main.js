@@ -1,122 +1,82 @@
-console.log('hi')
-var app = angular.module('Folio', ['ngRoute']);
+//
+//@TODO: check those articles about ADM in Angular with RequireJS
+//          - http://www.sitepoint.com/using-requirejs-angularjs-applications/
+//          - http://weblogs.asp.net/dwahlin/dynamically-loading-controllers-and-views-with-angularjs-and-requirejs
+//          - https://github.com/tnajdek/angular-requirejs-seed/
+//
 
-app.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
-  $routeProvider.when('/', {
-    templateUrl : 'html/index.html',
-    controller  : 'App'
-  }).when('/login', {
-    templateUrl : 'html/login.html',
-    controller  : 'Login'
-  }).when('/auth/panel', {
-    templateUrl : 'html/panel.html',
-    controller  : 'Panel'
-  }).otherwise({
-    redirectTo: '/'
-  });
-}]);
 
-app.config(['$httpProvider', function ($httpProvider) {
-    $httpProvider.interceptors.push(function ($q) {
-        return {
-            'response': function (response) {
-                //Will only be called for HTTP up to 300
-                console.log(response);
-                return response;
-            },
-            'responseError': function (rejection) {
- 
-                if(rejection.status === 401) {
-                    console.log('its 401 from handler')
-                    location.replace('#/login');
-                }
-                return $q.reject(rejection);
-            }
-        };
-    });
-}]);
 
-app.controller('App', function ($scope, $http, $window, $location) {
-  $scope.init = function() {
-    sessionStorage.clear();
-  };
+require.config({
+  
+  paths: {
+    'angular'        : 'libs/angular'          ,
+    'angularRoute'   : 'libs/angular-route'     
+  },
+  shim : {
+    'angular' : {
+      exports : 'angular'
+    },
+    'angularRoute' : {
+      deps: ['angular']
+    }
+  },
+  priority: [
+    'angular'
+  ]
+
 });
 
-app.controller('Login', function($scope, $http, $window, $location) {
-  console.log('here is login');
-  $scope.postLogin = function() {
-    $scope.user = {
-      username: $('#email').val(), 
-      password: $('#pswd').val()
-    };
-    $http.post('/login', $scope.user)
-         .success(function(data, status, headers, config) {
-           var token = (JSON.parse(data.token)).token;
-           $window.sessionStorage.token = token;
-           $location.path('/auth/panel');
-           //$scope.getPanel();
-           console.log('===========================');
-           console.log(data);
-         });
-  };
-});
+window.name = "NG_DEFER_BOOTSTRAP!";
 
-app.controller('Panel', function($scope, $http, $window, $location) {
-  $scope.getPanel = function() {
-    $http.get('/auth/panel')
-         .success(function(data, status, headers, config) {
-           
-         })
-         .error(function(data, status, headers, config) {
-
-         });
-
-  };  
-  $scope.checkSessionClick = function () {
-    $http.get('/auth/getsessions')
-         .success(function (data, status, headers, config) {
-           console.log('success from getsessions')
-         })
-         .error(function (argument) {
-           console.log('error from getsessions')
-         });
-  }
-  $scope.$on('$viewContentLoaded', function() {
+require([
+    'angular',
+    'app',
+    'components/routes'
+  ], function (angular, app, routes) {
     
-    $('#panel-box').height($(window).height());
+    var $html = angular.element(document.getElementsByTagName('html')[0]);
+    angular.element().ready(function () {
+      angular.resumeBootstrap([app['name']]);
+    });
 
-    $http.get('/auth/panel')
-         .success(function(data, status, headers, config) {
-//@TODO: this call back doesnt shoot. Discover why
-         })
-         .error(function(data, status, headers, config) {
-           $location.path('/login');
-         });
+}); // end require
+
+
+/*
+
+'use strickt';
+
+require.config({
+  
+  paths: {
+    'angular'        : 'libs/angular'          ,
+    'angularRoute'   : 'libs/angular-route'     
+  },
+  shim : {
+    'angular' : {
+      exports : 'angular'
+    },
+    'angularRoute' : {
+      deps: ['angular']
+    }
+  },
+  priority: {
+    'angular'
+  }
+
+});
+
+    require(['./app'], function (mainApp) {
+      console.log(mainApp)
+    });
+
+  $(document).ready(function () {
+
+
+/*  define('mainApp', ['angular', 'angular-route'], function (angular) {
+    var app = angular.module('mainApp', ['']);
+    return app;
   });
-});
 
-app.factory('authInterceptor', function($rootScope, $q, $window) {
-  return {
-      request: function (config) {
-        config.headers = config.headers || {};
-//
-//@TODO: dont use sessionStorage. Store token inside the app. 
-//       In this case you dont need clearify sessionStorage each time        
-//
-        if ($window.sessionStorage.token) {
-          config.headers.Authorization = $window.sessionStorage.token;
-        }
-        return config;
-      },
-      response: function (response) {
-        if (response.status === 401) {
-          // handle the case where the user is not authenticated
-        }
-        return response || $q.when(response);
-      }
-    };
-});
-
-app.config(function($httpProvider) {
-  $httpProvider.interceptors.push('authInterceptor');
-});
+  });*/

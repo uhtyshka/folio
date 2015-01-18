@@ -1,3 +1,4 @@
+
 html, body{
   display : block;
   float   : left;
@@ -6,7 +7,6 @@ html, body{
   position: relative;
   margin  : 0px;
   padding : 0px;
-
   background: white;
 }
 
@@ -20,7 +20,7 @@ body{
 circle
 =============================================================================*/
 
-
+/*
 
 .demo {
   width: 100px;
@@ -37,14 +37,14 @@ circle
   position: absolute;
 }
 .circle .inner {
-width: 100%;
-height: 100%;
-border-radius: 44%;
-border: 1px solid rgba(0, 0, 0, 0.1);
-border-right: none;
-border-top: none;
-backgroudn-clip: padding;
-box-shadow: inset 0px 0px 0px rgba(0,0,0, 0.15);
+  width: 100%;
+  height: 100%;
+  border-radius: 44%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: none;
+  border-top: none;
+  backgroudn-clip: padding;
+  box-shadow: inset 0px 0px 0px rgba(0,0,0, 0.15);
 }
 
 @-webkit-keyframes spin {
@@ -102,7 +102,7 @@ box-shadow: inset 0px 0px 0px rgba(0,0,0, 0.15);
 -webkit-animation: spin 5s infinite linear;
 animation: spin 5s infinite linear;
 }
-
+*/
 
 
 /*=============================================================================*/
@@ -116,8 +116,17 @@ Login
   margin-top: 120px;
 }
 
-#view-box {
+body {
   background: rgba(0,0,0,0.1);
+}
+
+#panel-box{
+  height: 100%;
+  min-height: 100%;
+  eight: auto;
+  position: fixed;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 #panel-box > div {
@@ -128,19 +137,21 @@ Login
 
 #header-box,
 #footer-box {
-  height: 10%;
+  height: 100px;
 }
 
-#header-box, #footer-box,
-#sidebar-box, #data-box{
+.white-board{
   -webkit-box-shadow: 0px 0px 6px 0px rgba(50, 50, 50, 0.3);
   -moz-box-shadow:    0px 0px 6px 0px rgba(50, 50, 50, 0.3);
   box-shadow:         0px 0px 6px 0px rgba(50, 50, 50, 0.3);
   background: white;
+  width: 100%;
+  min-height: 100%;
+  height: auto;
 }
 
 #header-box {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 #workspace-box {
@@ -152,18 +163,19 @@ Login
 }
 
 
-#sidebar-box, #data-box{
+#sidebar-box, #data-box, header, footer{
   height: 100%;
 }
 
 #sidebar-box{
   float: left;
-  width: 22%;
+  idth: 22%;
 }
 
 #data-box{
   float: right;
-  width: 75%;
+  idth: 300px;
+  
 }
 
 #logo-box {
@@ -179,17 +191,22 @@ Login
   color: white;
 }
 
+#head-nav{
+  height: 100px;
+  float: right;
+}
 
-
-
+#head-nav > button{
+  height: 100%; 
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  color: silver;
+}
 
 /* 
-
 ==============================================================
-
 */
-
-
 
 
 /* Container box to set the sides relative to */
@@ -230,51 +247,4 @@ box-shadow:         inset 0px 0px 4px 1px rgba(50, 50, 50, 0.75);
 .cube:hover {
   -webkit-transform: rotateX(89deg);
   transform: rotateX(89deg); /* Text bleed at 90º */
-
-
-
-
-
-
-
-
-
-/*.spinner {
-  width: 40px;
-  height: 40px;
-  margin: 100px auto;
-  background-color: #333;
-
-  border-radius: 100%;  
-  -webkit-animation: scaleout 1.0s infinite ease-in-out;
-  animation: scaleout 1.0s infinite ease-in-out;
 }
-
-@-webkit-keyframes scaleout {
-  0% { -webkit-transform: scale(0.0) }
-  100% {
-    -webkit-transform: scale(1.0);
-    opacity: 0;
-  }
-}
-
-@keyframes scaleout {
-  0% { 
-    transform: scale(0.0);
-    -webkit-transform: scale(0.0);
-  } 100% {
-    transform: scale(1.0);
-    -webkit-transform: scale(1.0);
-    opacity: 0;
-  }
-}
-*/
-/*#spinner{
-  float:left;
-  display: block;
-  width: 100%;
-  height: auto;
-  position: relative;
-  margin-top: 50%;
-  top: -25%;
-}*/

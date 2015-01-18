@@ -1,15 +1,14 @@
 doctype html
-html(data-ng-app='Folio')
+html(ng-app='mainApp')
   head
     title= title
     meta(charset='utf-8')
-    link(rel = 'stylesheet', href = '/css/bootstrap.css')
+    link(rel = 'stylesheet', href = '/css/bootstrap.min.css')
+    link(rel = 'stylesheet', href = '/css/font-awesome.min.css')
     link(rel = 'stylesheet', href = '/css/main.css')
-    script(src = '//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.js')
-    script(src = '//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular-route.js')
-    script(src = 'https://code.jquery.com/jquery-1.11.1.js')
-    script(src = 'http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js')
-    script(src = '')
-    script(src='/js/main.js')
   body(data-ng-controller='App' data-ng-init='init()')
     block content
+    script(src = './js/libs/jquery-2.1.1.js')
+    script(src = './js/libs/bootstrap.js')
+    script(src = './js/libs/aes.js')
+    script(src = './js/libs/require.js', data-main='./js/main.js')

@@ -21,6 +21,10 @@ app.set('views', path.join(__dirname, 'api/views'));
 app.set('view engine', 'jade');
 app.use('/', routes);
 app.use(express.static(path.join(__dirname, 'web')));
+/*
+
+@TODO: create separate module for error handler
+
 app.use(function (err, req, res, next) {
     var errorType = typeof err,
         code = 500,
@@ -42,7 +46,7 @@ app.use(function (err, req, res, next) {
             break;
     }
     return res.status(code).json(msg);
-});
+});*/
 
 app.listen(port);
 //console.log(models.getCategories);

@@ -6,7 +6,6 @@
 //       and handle the router interaction.
 //       You can check:
 //         https://www.npmjs.org/package/redis-sessions
-//         https://github.com/paulthomas404/trash-map/blob/8be8463e6a7ec20c3c7d077aa0884e547d05984b/api/services/AuthController.js
 //
 
 

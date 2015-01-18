@@ -37,7 +37,8 @@ router.use('/auth', function(req, res, next) {
     //token : '547a2452761dbff97e6a15a5s'
   }, function (response) {
     if (!response) {
-      res.send(401);
+      res.status(401).end();
+      return;
     }
     next();
   });
@@ -89,14 +90,15 @@ router.post('/login', function(req, res) {
 });
 
 router.get('/auth/panel', function(req, res) {
-  console.log('wellcome! Hope you are authorized');
-  //console.log(jwt.decode(req.headers['authorization']));
-  jwt.verify((req.headers['authorization']).slice(7), SECRET, function(err, decoded) {
-    console.log(decoded)
-  });
-  res.json({
-    resp: 'you are authorized'
-  });
+  var authHead = req.headers['authorization'];
+  if(!!authHead){
+    jwt.verify((req.headers['authorization']).slice(7), SECRET, function(err, decoded) {
+      console.log(decoded)
+    });
+    res.json({
+      resp: 'you are authorized'
+    });
+  }
 });
 
 
