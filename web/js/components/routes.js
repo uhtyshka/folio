@@ -1,18 +1,18 @@
-'use strict';
+
 
 define(['angular', '../app'], function (angular, app) {
   return app.config(['$routeProvider', function ($routeProvider) {
       console.log('ROUTER IS OK');
       $routeProvider.when('/', {
         templateUrl : 'html/index.html',
-        controller  : 'App'
+        controller  : 'HomeController'
       }).when('/login', {
         templateUrl : 'html/login.html',
-        controller  : 'Login'
-      }).when('/auth/panel', {
+        controller  : 'AuthController'
+      })/*.when('/auth/panel', {
         templateUrl : 'html/panel.html',
         controller  : 'Panel'
-      })
+      })*/
       console.log($routeProvider)
     }]);
 });

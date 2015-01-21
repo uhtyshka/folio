@@ -1,4 +1,4 @@
-'use strickt';
+ 'use strickt';
 
 require.config({
   

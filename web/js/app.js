@@ -2,22 +2,20 @@
 
 define([
   'angular',
-  'components/filters',
-  'components/services',
-  'components/directives',
-  'components/controllers',
+  'components/home/HomeModule',
+  'components/auth/AuthModule',
   'angularRoute',
-], function (angular, filters, services, directives, controllers) {
+], function (angular, Home, Auth) {
 
     // Declare app level module which depends on filters, and services
     
     return angular.module('mainApp', [
       'ngRoute',
-      'mainApp.filters',
-      'mainApp.services',
-      'mainApp.directives',
-      'mainApp.controllers'
-    ]);
+      'mainApp.Home',
+      'mainApp.Auth',
+    ]).run(function () {
+      console.log('runned')
+    });
 });
 
 /*'use strick';

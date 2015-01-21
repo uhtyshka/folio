@@ -4,13 +4,13 @@
 //          - http://weblogs.asp.net/dwahlin/dynamically-loading-controllers-and-views-with-angularjs-and-requirejs
 //          - https://github.com/tnajdek/angular-requirejs-seed/
 //
-
+window.name = "NG_DEFER_BOOTSTRAP!";
 
 
 require.config({
   
   paths: {
-    'angular'        : 'libs/angular'          ,
+    'angular'        : 'libs/angular' ,
     'angularRoute'   : 'libs/angular-route'     
   },
   shim : {
@@ -27,17 +27,15 @@ require.config({
 
 });
 
-window.name = "NG_DEFER_BOOTSTRAP!";
-
 require([
     'angular',
     'app',
     'components/routes'
   ], function (angular, app, routes) {
-    
+    console.log(app)
     var $html = angular.element(document.getElementsByTagName('html')[0]);
     angular.element().ready(function () {
-      angular.resumeBootstrap([app['name']]);
+      angular.resumeBootstrap(['mainApp']);
     });
 
 }); // end require

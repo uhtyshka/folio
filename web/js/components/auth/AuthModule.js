@@ -1,13 +1,30 @@
 'use strict';
 
-define(['angular', './services'], function (angular) {
-
+define(['angular'], function (angular) {
+  //console.log(homeTemp);
   /* Controllers */
-  
-  return angular.module('mainApp.Home', ['mainApp.services'])
+  //var $injector = angular.injector();
+  return angular.module('mainApp.Auth', ['ngRoute']).directive('authDirective' , function () {
+      return {
+        restrict: 'A',
+        templateUrl: 'js/components/auth/auth.html',
+        compile: function () {
+          console.log('auth directve compile fired!')
+        },
+        link: function () {
+          console.log('auth directve link fired!')
+        }
+      };
+    })
     // Sample controller where service is being used
-    .controller('homeController', ['$scope', 'version', function ($scope, version) {
-      $scope.scopedAppVersion = version;
+    .controller('AuthController', ['$scope', '$injector', function ($scope, $injector) {
+      require(['components/auth/AuthController'], function(auth) {
+        // injector method takes an array of modules as the first argument
+        // if you want your controller to be able to use components from
+        // any of your other modules, make sure you include it together with 'ng'
+        // Furthermore we need to pass on the $scope as it's unique to this controller
+        $injector.invoke(auth, this, {'$scope': $scope});
+      });
     }]);/*
     // More involved example where controller is required from an external file
     .controller('App', ['$scope', '$injector', function($scope, $injector) {

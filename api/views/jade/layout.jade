@@ -1,12 +1,12 @@
 doctype html
-html(ng-app='mainApp')
+html(ng-app='mainApp', ng-strict-di)
   head
     title= title
     meta(charset='utf-8')
     link(rel = 'stylesheet', href = '/css/bootstrap.min.css')
     link(rel = 'stylesheet', href = '/css/font-awesome.min.css')
     link(rel = 'stylesheet', href = '/css/main.css')
-  body(data-ng-controller='App' data-ng-init='init()')
+  body()
     block content
     script(src = './js/libs/jquery-2.1.1.js')
     script(src = './js/libs/bootstrap.js')
