@@ -7,13 +7,12 @@ define(['angular', '../app'], function (angular, app) {
         templateUrl : 'html/index.html',
         controller  : 'HomeController'
       }).when('/login', {
-        templateUrl : 'html/login.html',
+        templateUrl : 'js/components/auth/auth.html',
         controller  : 'AuthController'
-      })/*.when('/auth/panel', {
-        templateUrl : 'html/panel.html',
-        controller  : 'Panel'
-      })*/
-      console.log($routeProvider)
+      }).when('/auth/panel', {
+        templateUrl : 'js/components/panel/panel.html',
+        controller  : 'PanelController'
+      });
     }]);
 });
 

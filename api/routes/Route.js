@@ -61,9 +61,12 @@ router.post('/login', function(req, res) {
 //
 //@TODO: connect redis to project. Check tokenManager methods
 //
-  var clientPassword = req.body.password;
+
+  var clientPassword = req.body.pswd;
   function loginCallback(err, user){
     if( !!err ){ return next( err ); }
+    console.log('\n catched post ogin line68 | user below \n')
+    console.log(req.body.email);
     if(user){
       user.checkEncrypted('password', clientPassword, function(err, correctPassword) {
         if( !correctPassword ){ 
@@ -85,8 +88,8 @@ router.post('/login', function(req, res) {
     }
   };
   console.log('its ip to /login: ', req.connection.remoteAddress)
-  console.log(tokenManager);
-  User.findOne({ email: req.body.username }, loginCallback);
+  //console.log(tokenManager); 
+  User.findOne({ email: req.body.email }, loginCallback);
 });
 
 router.get('/auth/panel', function(req, res) {
@@ -101,6 +104,14 @@ router.get('/auth/panel', function(req, res) {
   }
 });
 
+router.post('/auth', function (req, res) {
+  console.log('::::::::::::::::::::::::::::::::::::');
+  console.log('::::::::::::::::::::::::::::::::::::');
+  console.log(':::: req  -  ' + req + ' ::::::::::::::::::::::::::::::::');console.log('::::::::::::::::::::::::::::::::::::');
+  console.log('::::::::::::::::::::::::::::::::::::');
+  console.log(':::: res  -  ' + res + ' ::::::::::::::::::::::::::::::::');
+});
+
 
 router.get('/auth/getsessions', function (req, res) {
   console.log('Im from get sessions! Whants going on here&');
@@ -113,9 +124,98 @@ router.post('/logout', function(req, res) {
 });
 
 
-router.get('/about', function(req, res) {
+//
+// User
+//
+
+router.get('/user', function (req, res) {
+  
+});
+
+router.post('/user/update', function (req, res) {
 
 });
+
+//
+// Categories
+//
+
+router.post('/categories', function (req, res) {
+  // create
+
+});
+
+router.get('/categories', function (req, res) {
+  // read
+    
+});
+
+router.get('/categories/update', function (req, res) {
+  // update
+
+});
+
+router.get('/categories/destroy', function (req, res) {
+  // destroy
+
+});
+
+//
+// Projects
+//
+
+router.post('/projects', function (req, res) {
+  // create
+
+});
+
+router.get('/projects', function (req, res) {
+  // read
+    
+});
+
+router.get('/projects/update', function (req, res) {
+  // update
+
+});
+
+router.get('/projects/destroy', function (req, res) {
+  // destroy
+
+});
+
+//
+// Items
+//
+
+router.post('/items', function (req, res) {
+  // create
+
+});
+
+router.get('/items', function (req, res) {
+  // read
+    
+});
+
+router.get('/items/update', function (req, res) {
+  // update
+
+});
+
+router.get('/items/destroy', function (req, res) {
+  // destroy
+
+});
+
+//
+// Projects
+//
+
+
+
+
+
 
 //TODO need to add models and and some interface to work with them
 

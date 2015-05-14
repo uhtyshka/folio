@@ -5,13 +5,23 @@
         <label for="email">
           Email:
         </label>
-        <input type="text" id="email" value="krulatik@gmail.com" class="form-control" placeholder="@">
+        <input type="text" 
+               id="email"
+               class="form-control" 
+               placeholder="@"
+               ng-model="authData.email"
+          >
       </div>
       <div class="pswd-box form-group" >
         <label for="email">
           Password:
         </label>
-        <input type="text" id="pswd" value="123123" class="form-control" placeholder="Type your password">
+        <input type="text" 
+               id="pswd" 
+               class="form-control" 
+               placeholder="Type your password"
+               ng-model="authData.pswd"
+          >
       </div>
       <div class="btns-box form-group">
         <a href="#" ng-click="postLogin($event)" class="btn btn-default" > Log in </a>

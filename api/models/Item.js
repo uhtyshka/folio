@@ -5,7 +5,7 @@ var mongoose        = require('mongoose')
 
 encrypted.loadTypes(mongoose);
 
-var Project = new mongoose.Schema({
+var Item = new mongoose.Schema({
   name: {
     type     : String,
     required : true,
@@ -26,7 +26,7 @@ var Project = new mongoose.Schema({
 });
 
 
-Project.methods.serialize = function() {
+Item.methods.serialize = function() {
   return {
     id          : this.id,
     name        : this.name,
@@ -36,7 +36,7 @@ Project.methods.serialize = function() {
   };
 };
 
-Project.plugin(timestamps);
-Project.plugin(encrypted.plugins.encryptedPlugin);
-Project.plugin(uniqueValidator);
-module.exports = mongoose.model('Project', Project);
+Item.plugin(timestamps);
+Item.plugin(encrypted.plugins.encryptedPlugin);
+Item.plugin(uniqueValidator);
+module.exports = mongoose.model('Item', Item);

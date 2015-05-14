@@ -32,7 +32,6 @@ require([
     'app',
     'components/routes'
   ], function (angular, app, routes) {
-    console.log(app)
     var $html = angular.element(document.getElementsByTagName('html')[0]);
     angular.element().ready(function () {
       angular.resumeBootstrap(['mainApp']);

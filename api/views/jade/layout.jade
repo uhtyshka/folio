@@ -6,7 +6,7 @@ html(ng-app='mainApp', ng-strict-di)
     link(rel = 'stylesheet', href = '/css/bootstrap.min.css')
     link(rel = 'stylesheet', href = '/css/font-awesome.min.css')
     link(rel = 'stylesheet', href = '/css/main.css')
-  body()
+  body(ng-controller="mainController")
     block content
     script(src = './js/libs/jquery-2.1.1.js')
     script(src = './js/libs/bootstrap.js')

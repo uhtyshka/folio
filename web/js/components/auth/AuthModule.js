@@ -17,7 +17,14 @@ define(['angular'], function (angular) {
       };
     })
     // Sample controller where service is being used
-    .controller('AuthController', ['$scope', '$injector', function ($scope, $injector) {
+    .controller('AuthController', ['$scope', 
+                                   '$injector', 
+                                   'ApiFactory', 
+                                   function ($scope, $injector, ApiFactory) {
+                                    console.log('::::::::::::::: API BEFOR INJECTOR')
+                                    console.log(ApiFactory)
+                                    console.log('::::::::::::::: API BEFOR INJECTOR');
+                                    $scope.api = ApiFactory;
       require(['components/auth/AuthController'], function(auth) {
         // injector method takes an array of modules as the first argument
         // if you want your controller to be able to use components from
